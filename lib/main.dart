@@ -31,22 +31,42 @@ class MyHomePage extends StatefulWidget {
 }
 class _MyHomePageState extends State<MyHomePage> {
 
-    String dropdownValue = 'Homem';
+    String dropdownSexo = 'Homem';
+    String dropdownAtvFisica = 'Nenhuma atividade física';
     int alturaUsuario = 0;
     double pesoUsuario = 0.0;
     int idadeUsuario = 0;
-    double tmb = 0;
+    double tmb = 0.0;
+    double ndc = 0.0;
+    var ndcTeste;
 
   void _calcTMB(int alt, double peso, int idade, var sexo){
     setState(() {
       if(sexo == 'Homem'){
-        tmb = 66 + 13.8 * peso + 5 * alt - 6.8 * idade;
+        tmb = 66 + 13.7 * peso + 5 * alt - 6.8 * idade;
       }
       if(sexo == 'Mulher'){
         tmb = 655 + 9.6 * peso + 1.8 * alt + 4.7 * idade;
       }
     });
   }
+// AGORA TEM Q TESTAR SE TA FUNCIONANDO!!!
+    void _calcNDC(var atvfisica){
+      setState(() {
+        if(atvfisica == 'Nenhuma atividade física'){
+          ndc = tmb * 1.2;
+        }
+        if(atvfisica == 'Atividade física leve'){
+          ndc = tmb * 1.375;
+        }
+        if(atvfisica == 'Atividade física moderada'){
+          ndc = tmb * 1.55;
+        }
+        if(atvfisica == 'Atividade física intensa'){
+          ndc = tmb * 1.725;
+        }
+      });
+    }
   @override
   Widget build(BuildContext context) {
 
@@ -64,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: DropdownButton<String>(
-                value: dropdownValue,
+                value: dropdownSexo,
                 icon: const Icon(Icons.arrow_downward),
                 items: <String>['Homem', 'Mulher']
                     .map<DropdownMenuItem<String>>((String value) {
@@ -78,11 +98,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 }).toList(),
                 onChanged: (String? newValue) {
                   setState(() {
-                    dropdownValue = newValue!;
+                    dropdownSexo = newValue!;
                   });
                 },
               ),
             ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: DropdownButton<String>(
+            value: dropdownAtvFisica,
+            icon: const Icon(Icons.arrow_downward),
+            items: <String>['Nenhuma atividade física', 'Atividade física leve', 'Atividade física moderada', 'Atividade física intensa']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownAtvFisica = newValue!;
+              });
+            },
+          ),
+        ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
@@ -125,7 +167,8 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: ElevatedButton(
               onPressed: () {
-                _calcTMB(alturaUsuario, pesoUsuario, idadeUsuario, dropdownValue);
+                _calcTMB(alturaUsuario, pesoUsuario, idadeUsuario, dropdownSexo);
+                _calcNDC(dropdownAtvFisica);
               },
               child: Text('CALCULAR DIETA'),
             ),
@@ -133,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: Text(
-                '$tmb',
+                'TMB:        NDC:\n$tmb     $ndc',
               ),
             ),
           ],
