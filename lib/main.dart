@@ -71,122 +71,125 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
+        //resizeToAvoidBottomInset: false,
+        appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Center(
         child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: Text(
-                'Insira suas informações:',
-                style: TextStyle(
-                    fontWeight: FontWeight.w200,
-                    fontSize: 30
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: DropdownButton<String>(
-                value: dropdownSexo,
-                icon: const Icon(Icons.arrow_downward),
-                items: <String?>['Homem', 'Mulher']
-                    .map<DropdownMenuItem<String>>((String? value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value ?? "",
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownSexo = newValue;
-                  });
-                },
-                hint: const Text("Sexo"),
-                ),
-              ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: DropdownButton<String?>(
-            hint: const Text("Nível de atividade física diária"),
-            value: dropdownAtvFisica,
-            icon: const Icon(Icons.arrow_downward),
-            items: <String?>['Nenhuma atividade física', 'Atividade física leve', 'Atividade física moderada', 'Atividade física intensa']
-                .map<DropdownMenuItem<String>>((String? value) {
-              return DropdownMenuItem<String>(
-                value: value,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child: Text(
-                  value ?? "",
-                  style: const TextStyle(fontSize: 20),
-                ),
-              );
-            }).toList(),
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownAtvFisica = newValue;
-              });
-            },
-          ),
-        ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                onChanged: (text) {
-                  alturaUsuario = int.parse(text);
-                },
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Altura (cm)',
-                ),
-
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                onChanged: (text) {
-                  pesoUsuario = double.parse(text);
-                },
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Peso (kg)',
-                ),
-
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                onChanged: (text) {
-                  idadeUsuario = int.parse(text);
-                },
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Idade',
+                  'Insira suas informações:',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w200,
+                      fontSize: 30
+                  ),
                 ),
               ),
-            ),
-            Padding(
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: DropdownButton<String>(
+                  value: dropdownSexo,
+                  icon: const Icon(Icons.arrow_downward),
+                  items: <String?>['Homem', 'Mulher']
+                      .map<DropdownMenuItem<String>>((String? value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value ?? "",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownSexo = newValue;
+                    });
+                  },
+                  hint: const Text("Sexo"),
+                  ),
+                ),
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: ElevatedButton(
-              onPressed: () {
-                _calcTMB(alturaUsuario, pesoUsuario, idadeUsuario, dropdownSexo);
-                _calcNDC(dropdownAtvFisica);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MySecondPage(tmb, ndc)));
+            child: DropdownButton<String?>(
+              hint: const Text("Nível de atividade física diária"),
+              value: dropdownAtvFisica,
+              icon: const Icon(Icons.arrow_downward),
+              items: <String?>['Nenhuma atividade física', 'Atividade física leve', 'Atividade física moderada', 'Atividade física intensa']
+                  .map<DropdownMenuItem<String>>((String? value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value ?? "",
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownAtvFisica = newValue;
+                });
               },
-              child: Text('CALCULAR DIETA'),
             ),
-            ),
-          ],
+          ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextFormField(
+                  onChanged: (text) {
+                    alturaUsuario = int.parse(text);
+                  },
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Altura (cm)',
+                  ),
+
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextFormField(
+                  onChanged: (text) {
+                    pesoUsuario = double.parse(text);
+                  },
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Peso (kg)',
+                  ),
+
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextFormField(
+                  onChanged: (text) {
+                    idadeUsuario = int.parse(text);
+                  },
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Idade',
+                  ),
+                ),
+              ),
+              Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: ElevatedButton(
+                onPressed: () {
+                  _calcTMB(alturaUsuario, pesoUsuario, idadeUsuario, dropdownSexo);
+                  _calcNDC(dropdownAtvFisica);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MySecondPage(tmb, ndc)));
+                },
+                child: Text('CALCULAR DIETA'),
+              ),
+              ),
+            ],
+          ),
         ),
       ),
     ),
@@ -195,8 +198,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class MySecondPage extends StatefulWidget {
-  double tmb = 0.0;
-  double ndc = 0.0;
+  var tmb;
+  var ndc;
   MySecondPage(this.tmb, this. ndc);
 
   @override
@@ -212,7 +215,67 @@ class MySecondPage extends StatefulWidget {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
         body: Center(
-          child: Text('TMB:        NDC:\n${widget.tmb}     ${widget.ndc}'),
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    child: Text(
+                      'Consumo de calorias para emagrecimento:',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 25
+                      ),
+                    ),
+                  ),
+                  Text(
+                      '${(widget.ndc-488).round()} kcal\n\n',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    child: Text(
+                      'Consumo de calorias para manutenção do peso:',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 25,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    '${(widget.ndc).round()} kcal\n\n',
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                    child: Text(
+                      'Consumo de calorias para ganho de massa:',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 25
+                      ),
+                    ),
+                  ),
+                  Text(
+                    '${(widget.ndc+493).round()} kcal',
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       );
     }
