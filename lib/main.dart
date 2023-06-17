@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Informações do usuário'),
+      home: const MyHomePage(title: 'Lenci Diet'),
     );
   }
 }
@@ -211,7 +211,7 @@ class MySecondPage extends StatefulWidget {
     Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Calorias para dieta'),
+          title: const Text('Calorias para a sua dieta'),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
         body: Center(
@@ -280,5 +280,3 @@ class MySecondPage extends StatefulWidget {
       );
     }
   }
-
-
