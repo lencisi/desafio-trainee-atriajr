@@ -1,16 +1,12 @@
-# aplicativodieta
+# Lenci Diet
 
-A new Flutter project.
+Esse aplicativo tem como objetivo ajudar as pessoas a terem uma base de quantas calorias precisam ingerir diariamente com base em seu objetivo (emagrecimento, manutenção do peso ou ganho de massa).
+O usuário deve inserir algumas informações básicas sobre ele e com base nisso o app calcula automaticamente as calorias, é bem intuitivo.
 
-## Getting Started
+# Requisitos
 
-This project is a starting point for a Flutter application.
+Para usar o aplicativo é necessário ter o Flutter instalado no computador, assim como uma IDE que sejá compativel com o framework.
 
-A few resources to get you started if this is your first Flutter project:
+# Como usar
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Para usar o app basta clonar esse repositório usando o comando "git clone https://github.com/lencisi/desafio-trainee-atriajr.git", abri-lo em uma IDE como VSCode ou Android Studio, conectar um dispositivo móvel ou usar um emulador, e rodar o código "main.dart" presente na pasta "lib"!
